@@ -1,22 +1,20 @@
-# Placeholders de esta rama (sesion-06)
+# Placeholders de esta rama (sesion-07)
 
-Punto de partida: API REST de tareas completa y probada (Sesión 5) — `TaskController`, `TaskResource` y los 3 feature tests ya resueltos en esta rama. El trabajo de esta sesión es proteger la API con Laravel Sanctum y filtrar las tareas por el usuario autenticado.
+Punto de partida: TaskFlow integrado de extremo a extremo (Sesión 6) — Sanctum resuelto, rutas protegidas, tests actualizados para autenticar con `Sanctum::actingAs()`. El trabajo de esta sesión es preparar el proyecto para presentarlo: documentación y CI.
 
 | Archivo | Qué reemplazar |
 |---|---|
-| `app/Http/Controllers/Api/AuthController.php` | Los 3 métodos (`register`, `login`, `logout`) |
-| `routes/api.php` | Envolver las rutas de `tasks` y `/user` en `Route::middleware('auth:sanctum')->group(...)` |
-| `app/Http/Controllers/Api/TaskController.php` | `index()`: usar `$request->user()->tasks` en vez de `Task::all()`. `store()`: asignar `user_id` desde `$request->user()->id` en vez de confiar en el body |
-
-**Nota:** los tests de `tests/Feature/TaskApiTest.php` de la Sesión 5 dejarán de pasar tal cual una vez apliques el middleware `auth:sanctum` (las peticiones de los tests ya no estarán autenticadas). Adaptarlos para autenticar al usuario de prueba (`Sanctum::actingAs($user)`) es parte del trabajo de esta sesión, aunque no está marcado como placeholder explícito — coméntalo con tu instructor si no llegas a este punto en el tiempo de clase.
+| `docs/README-PROYECTO.md` | Los 4 bloques `{{REEMPLAZAR}}` (descripción, versión de Laravel, pasos de arranque, patrón GoF aplicado) |
+| `.github/workflows/tests.yml` | El workflow completo (setup-php, composer install, correr `php artisan test`) |
 
 ## Comando de arranque
 
 ```bash
-composer require laravel/sanctum   # si tu proyecto local aún no lo tiene
 composer install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate
-php artisan route:list --path=api   # revisa qué rutas quedan detrás de auth:sanctum
+php artisan test
 ```
+
+Los 3 tests de `TaskApiTest` deben seguir en verde — son exactamente lo que el workflow de CI de este paso automatiza.

@@ -6,27 +6,54 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        // TODO(sesion-06): valida name, email (required|email|unique:users) y
-        // password (required|min:8). Crea el usuario con Hash::make() en el
-        // password, genera un token con $user->createToken('taskflow')->plainTextToken
-        // y responde con el usuario + el token.
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+        ]);
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return response()->json([
+            'user' => $user,
+            'token' => $user->createToken('taskflow')->plainTextToken,
+        ], 201);
     }
 
     public function login(Request $request)
     {
-        // TODO(sesion-06): valida email y password. Busca el usuario por email
-        // y verifica el password con Hash::check(). Si no coincide, responde 401.
-        // Si coincide, genera un token igual que en register() y responde con él.
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $validated['email'])->first();
+
+        if (! $user || ! Hash::check($validated['password'], $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['Las credenciales no son válidas.'],
+            ]);
+        }
+
+        return response()->json([
+            'user' => $user,
+            'token' => $user->createToken('taskflow')->plainTextToken,
+        ]);
     }
 
     public function logout(Request $request)
     {
-        // TODO(sesion-06): revoca el token actual con
-        // $request->user()->currentAccessToken()->delete().
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(null, 204);
     }
 }

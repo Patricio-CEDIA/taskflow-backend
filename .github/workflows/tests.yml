@@ -1,0 +1,14 @@
+name: tests
+
+on: [push, pull_request]
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # TODO(sesion-07): completa este workflow — setup-php, composer install,
+      # cp .env.example .env, php artisan key:generate, y finalmente
+      # `php artisan test` (o `vendor/bin/phpunit`) para correr los feature
+      # tests de la Sesión 5 automáticamente en cada push.
+      - run: echo "TODO(sesion-07): reemplaza este workflow para correr los tests automáticamente."

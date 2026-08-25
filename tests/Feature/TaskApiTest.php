@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class TaskApiTest extends TestCase
@@ -14,6 +15,7 @@ class TaskApiTest extends TestCase
     public function test_index_devuelve_200_con_la_coleccion_de_tareas(): void
     {
         $user = User::factory()->create();
+        Sanctum::actingAs($user);
         Task::factory()->count(3)->for($user)->create();
 
         $response = $this->getJson('/api/tasks');
@@ -23,6 +25,8 @@ class TaskApiTest extends TestCase
 
     public function test_store_con_datos_invalidos_devuelve_422(): void
     {
+        Sanctum::actingAs(User::factory()->create());
+
         $response = $this->postJson('/api/tasks', []);
 
         $response->assertStatus(422);
@@ -30,11 +34,10 @@ class TaskApiTest extends TestCase
 
     public function test_store_con_datos_validos_crea_la_tarea_y_devuelve_201(): void
     {
-        $user = User::factory()->create();
+        Sanctum::actingAs(User::factory()->create());
 
         $response = $this->postJson('/api/tasks', [
             'title' => 'Escribir tests de la API',
-            'user_id' => $user->id,
         ]);
 
         $response->assertStatus(201);
