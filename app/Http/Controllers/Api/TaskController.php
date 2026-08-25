@@ -9,34 +9,48 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // TODO(sesion-05): devuelve todas las tareas usando TaskResource::collection().
+        // TODO(sesion-06): en vez de Task::all(), devuelve solo las tareas del
+        // usuario autenticado: $request->user()->tasks.
+        return TaskResource::collection(Task::all());
     }
 
     public function store(Request $request)
     {
-        // TODO(sesion-05): valida los datos ($request->validate([...])) con las reglas:
-        // title (required|string|max:255), description (nullable|string),
-        // status (in:pendiente,en_progreso,completada), user_id (required|exists:users,id).
-        // Luego crea la tarea con Task::create() y responde con new TaskResource($task).
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'in:pendiente,en_progreso,completada',
+        ]);
+
+        // TODO(sesion-06): asigna la tarea al usuario autenticado en vez de
+        // confiar en un user_id enviado por el cliente:
+        // $validated['user_id'] = $request->user()->id;
+        $task = Task::create($validated);
+        return new TaskResource($task);
     }
 
     public function show(Task $task)
     {
-        // TODO(sesion-05): responde con new TaskResource($task).
+        return new TaskResource($task);
     }
 
     public function update(Request $request, Task $task)
     {
-        // TODO(sesion-05): valida los datos igual que en store() pero con "sometimes"
-        // en vez de "required", actualiza la tarea con $task->update() y responde
-        // con new TaskResource($task).
+        $validated = $request->validate([
+            'title' => 'sometimes|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'in:pendiente,en_progreso,completada',
+        ]);
+
+        $task->update($validated);
+        return new TaskResource($task);
     }
 
     public function destroy(Task $task)
     {
-        // TODO(sesion-05): elimina la tarea con $task->delete() y responde
-        // con response()->json(null, 204).
+        $task->delete();
+        return response()->json(null, 204);
     }
 }
