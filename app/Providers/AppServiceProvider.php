@@ -15,7 +15,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // TODO(sesion-03): registra el TaskObserver para que se dispare
-        // automáticamente en cada cambio de una Task. Pista: Task::observe(...).
+        Task::observe(TaskObserver::class);
     }
 }

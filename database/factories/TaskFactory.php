@@ -9,15 +9,11 @@ class TaskFactory extends Factory
 {
     public function definition(): array
     {
-        // TODO(sesion-03): define los datos de prueba de una tarea.
-        // Debe incluir: title (frase corta), description (opcional, puede ser null),
-        // status (uno de: pendiente, en_progreso, completada) y user_id (usar
-        // User::factory() para crear el usuario dueño si no se pasa explícito).
         return [
-            'title' => '{{REEMPLAZAR}}',
-            'description' => '{{REEMPLAZAR}}',
-            'status' => '{{REEMPLAZAR}}',
-            'user_id' => '{{REEMPLAZAR}}',
+            'title' => $this->faker->sentence(4),
+            'description' => $this->faker->optional()->paragraph(),
+            'status' => $this->faker->randomElement(['pendiente', 'en_progreso', 'completada']),
+            'user_id' => User::factory(),
         ];
     }
 }
