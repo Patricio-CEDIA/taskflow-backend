@@ -9,15 +9,21 @@ class TaskFactory extends Factory
 {
     public function definition(): array
     {
-        // TODO(sesion-03): define los datos de prueba de una tarea.
-        // Debe incluir: title (frase corta), description (opcional, puede ser null),
-        // status (uno de: pendiente, en_progreso, completada) y user_id (usar
-        // User::factory() para crear el usuario dueño si no se pasa explícito).
+        // TODO(sesion-03): descomenta las 4 líneas de abajo, una por una.
         return [
-            'title' => '{{REEMPLAZAR}}',
-            'description' => '{{REEMPLAZAR}}',
-            'status' => '{{REEMPLAZAR}}',
-            'user_id' => '{{REEMPLAZAR}}',
+            // Título corto y realista: sentence(4) genera una "oración" de 4 palabras falsas.
+            // 'title' => fake()->sentence(4),
+
+            // Texto más largo para la columna description — un párrafo de relleno.
+            // 'description' => fake()->paragraph(),
+
+            // El status solo puede ser uno de estos 3 valores exactos (los mismos que
+            // usará el frontend de React más adelante) — randomElement elige uno al azar.
+            // 'status' => fake()->randomElement(['pendiente', 'en_progreso', 'completada']),
+
+            // Toda tarea necesita un usuario dueño (user_id es clave foránea a users);
+            // User::factory() crea un usuario de prueba nuevo y usa su id automáticamente.
+            // 'user_id' => User::factory(),
         ];
     }
 }

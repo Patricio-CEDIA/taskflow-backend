@@ -15,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // TODO(sesion-03): registra el TaskObserver para que se dispare
-        // automáticamente en cada cambio de una Task. Pista: Task::observe(...).
+        // TODO(sesion-03): descomenta la línea de abajo.
+        // Le dice a Laravel: "cada vez que un modelo Task dispare un evento (creating,
+        // updating, deleting, etc.), avisa a TaskObserver" — va en boot() porque ahí
+        // es donde Laravel ya terminó de cargar todos los servicios.
+        // Task::observe(TaskObserver::class);
     }
 }
