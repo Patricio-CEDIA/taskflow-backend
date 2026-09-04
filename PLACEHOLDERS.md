@@ -1,4 +1,4 @@
-# Placeholders de esta rama (sesion-05)
+# Placeholders de esta rama (sesion-04)
 
 Punto de partida: modelos, migración, `TaskFactory` y `TaskObserver` de la Sesión 3 ya completos (puedes verlos resueltos en esta rama). El trabajo de esta sesión es construir la API REST de tareas y probarla — con pruebas automatizadas, no solo con Postman.
 

@@ -27,8 +27,8 @@ composer install
 |---|---|---|
 | `sesion-02` | Sesión 2 — Arquitectura | Crear el proyecto Laravel (`composer create-project`) y completar `docs/ARQUITECTURA.md` |
 | `sesion-03` | Sesión 3 — Patrones GoF | `TaskFactory` (Factory Pattern) y `TaskObserver` (Observer Pattern) |
-| `sesion-05` | Sesión 5 — API REST | `TaskController`, `TaskResource` y los feature tests de `tests/Feature/TaskApiTest.php` |
-| `sesion-06` | Sesión 6 — Autenticación | `AuthController`, rutas protegidas con Sanctum, filtrado de tareas por usuario |
+| `sesion-04` | Sesión 4 — API REST | `TaskController`, `TaskResource` y los feature tests de `tests/Feature/TaskApiTest.php` |
+| `sesion-05` | Sesión 5 — Autenticación | `AuthController`, rutas protegidas con Sanctum, filtrado de tareas por usuario, tests adaptados con `Sanctum::actingAs()` |
 | `sesion-07` | Sesión 7 — Despliegue | `README.md` final del proyecto y el workflow de CI en `.github/workflows/tests.yml` |
 
-Cada rama se creó a partir de la anterior (`git checkout -b sesion-05 sesion-03`, etc.), así que `git log --oneline` refleja la progresión real de la práctica del curso.
+Cada rama se creó a partir de la anterior (`git checkout -b sesion-04 sesion-03`, etc.), así que `git log --oneline` refleja la progresión real de la práctica del curso. El backend queda completo desde la Sesión 5 — la Sesión 6 (React) es un repo aparte (`taskflow-frontend`) que se conecta a esta misma API.
