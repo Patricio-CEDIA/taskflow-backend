@@ -1,6 +1,6 @@
-# Placeholders de esta rama (sesion-06)
+# Placeholders de esta rama (sesion-05)
 
-Punto de partida: API REST de tareas completa y probada (Sesión 5) — `TaskController`, `TaskResource` y los 3 feature tests ya resueltos en esta rama. El trabajo de esta sesión es proteger la API con Laravel Sanctum y filtrar las tareas por el usuario autenticado.
+Punto de partida: API REST de tareas completa y probada (Sesión 4) — `TaskController`, `TaskResource` y los 3 feature tests ya resueltos en esta rama. El trabajo de esta sesión es proteger la API con Laravel Sanctum y filtrar las tareas por el usuario autenticado — todavía sin frontend, el backend queda completo por su cuenta.
 
 | Archivo | Qué reemplazar |
 |---|---|
@@ -8,7 +8,7 @@ Punto de partida: API REST de tareas completa y probada (Sesión 5) — `TaskCon
 | `routes/api.php` | Envolver las rutas de `tasks` y `/user` en `Route::middleware('auth:sanctum')->group(...)` |
 | `app/Http/Controllers/Api/TaskController.php` | `index()`: usar `$request->user()->tasks` en vez de `Task::all()`. `store()`: asignar `user_id` desde `$request->user()->id` en vez de confiar en el body |
 
-**Nota:** los tests de `tests/Feature/TaskApiTest.php` de la Sesión 5 dejarán de pasar tal cual una vez apliques el middleware `auth:sanctum` (las peticiones de los tests ya no estarán autenticadas). Adaptarlos para autenticar al usuario de prueba (`Sanctum::actingAs($user)`) es parte del trabajo de esta sesión, aunque no está marcado como placeholder explícito — coméntalo con tu instructor si no llegas a este punto en el tiempo de clase.
+**Nota:** los tests de `tests/Feature/TaskApiTest.php` de la Sesión 4 dejarán de pasar tal cual una vez apliques el middleware `auth:sanctum` (las peticiones de los tests ya no estarán autenticadas). Adaptarlos para autenticar al usuario de prueba con `Sanctum::actingAs($user)` es un paso propio de esta sesión (Paso 4 del instructivo) — no lo dejes para después.
 
 ## Comando de arranque
 
