@@ -9,11 +9,15 @@ class TaskResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        // TODO(sesion-04): retorna un array con los campos id, title, description,
-        // status, user_id, y created_at formateado como 'Y-m-d H:i'
-        // (pista: $this->created_at->format('Y-m-d H:i')).
-        return [
-            //
-        ];
+        // TODO(sesion-04): borra la línea de abajo y descomenta el bloque completo.
+        return [];
+        // return [
+        //     'id' => $this->id,
+        //     'title' => $this->title,
+        //     'description' => $this->description,
+        //     'status' => $this->status,
+        //     'user_id' => $this->user_id,
+        //     'created_at' => $this->created_at->format('Y-m-d H:i'),
+        // ];
     }
 }
