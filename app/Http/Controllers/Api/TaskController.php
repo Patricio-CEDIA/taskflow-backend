@@ -11,9 +11,9 @@ class TaskController extends Controller
 {
     public function index(Request $request)
     {
-        // TODO(sesion-05): en vez de Task::all(), devuelve solo las tareas del
-        // usuario autenticado: $request->user()->tasks.
+        // TODO(sesion-05): borra la línea de abajo y descomenta el bloque completo.
         return TaskResource::collection(Task::all());
+        // return TaskResource::collection($request->user()->tasks);
     }
 
     public function store(Request $request)
@@ -24,10 +24,9 @@ class TaskController extends Controller
             'status' => 'in:pendiente,en_progreso,completada',
         ]);
 
-        // TODO(sesion-05): asigna la tarea al usuario autenticado en vez de
-        // confiar en un user_id enviado por el cliente:
-        // $validated['user_id'] = $request->user()->id;
+        // TODO(sesion-05): borra la línea de abajo y descomenta el bloque completo.
         $task = Task::create($validated);
+        // $task = $request->user()->tasks()->create($validated);
         return new TaskResource($task);
     }
 
