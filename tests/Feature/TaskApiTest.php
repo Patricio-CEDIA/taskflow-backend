@@ -40,4 +40,18 @@ class TaskApiTest extends TestCase
         $response->assertStatus(201);
         $this->assertDatabaseHas('tasks', ['title' => 'Escribir tests de la API']);
     }
+
+    public function test_un_usuario_no_puede_ver_la_tarea_de_otro(): void
+    {
+        // TODO(sesion-05): borra el markTestIncomplete() de abajo y descomenta el bloque completo.
+        $this->markTestIncomplete('Reemplaza este placeholder en la Sesión 5.');
+        // $userA = User::factory()->create();
+        // $userB = User::factory()->create();
+        // Sanctum::actingAs($userA);
+        // $tareaDeB = Task::factory()->for($userB)->create();
+        //
+        // $response = $this->getJson("/api/tasks/{$tareaDeB->id}");
+        //
+        // $response->assertStatus(404);
+    }
 }

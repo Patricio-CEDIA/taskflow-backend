@@ -30,12 +30,15 @@ class TaskController extends Controller
         return new TaskResource($task);
     }
 
-    public function show(Task $task)
+    public function show(Request $request, $id)
     {
+        // TODO(sesion-05): borra la línea de abajo y descomenta la línea real.
+        $task = Task::findOrFail($id);
+        // $task = $request->user()->tasks()->findOrFail($id);
         return new TaskResource($task);
     }
 
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'title' => 'sometimes|string|max:255',
@@ -43,12 +46,18 @@ class TaskController extends Controller
             'status' => 'in:pendiente,en_progreso,completada',
         ]);
 
+        // TODO(sesion-05): borra la línea de abajo y descomenta la línea real.
+        $task = Task::findOrFail($id);
+        // $task = $request->user()->tasks()->findOrFail($id);
         $task->update($validated);
         return new TaskResource($task);
     }
 
-    public function destroy(Task $task)
+    public function destroy(Request $request, $id)
     {
+        // TODO(sesion-05): borra la línea de abajo y descomenta la línea real.
+        $task = Task::findOrFail($id);
+        // $task = $request->user()->tasks()->findOrFail($id);
         $task->delete();
         return response()->json(null, 204);
     }
