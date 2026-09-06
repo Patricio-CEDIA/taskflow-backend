@@ -43,4 +43,16 @@ class TaskApiTest extends TestCase
         $response->assertStatus(201);
         $this->assertDatabaseHas('tasks', ['title' => 'Escribir tests de la API']);
     }
+
+    public function test_un_usuario_no_puede_ver_la_tarea_de_otro(): void
+    {
+        $userA = User::factory()->create();
+        $userB = User::factory()->create();
+        Sanctum::actingAs($userA);
+        $tareaDeB = Task::factory()->for($userB)->create();
+
+        $response = $this->getJson("/api/tasks/{$tareaDeB->id}");
+
+        $response->assertStatus(404);
+    }
 }

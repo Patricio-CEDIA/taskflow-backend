@@ -27,13 +27,16 @@ class TaskController extends Controller
         return new TaskResource($task);
     }
 
-    public function show(Task $task)
+    public function show(Request $request, $id)
     {
+        $task = $request->user()->tasks()->findOrFail($id);
         return new TaskResource($task);
     }
 
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
+        $task = $request->user()->tasks()->findOrFail($id);
+
         $validated = $request->validate([
             'title' => 'sometimes|string|max:255',
             'description' => 'nullable|string',
@@ -44,8 +47,9 @@ class TaskController extends Controller
         return new TaskResource($task);
     }
 
-    public function destroy(Task $task)
+    public function destroy(Request $request, $id)
     {
+        $task = $request->user()->tasks()->findOrFail($id);
         $task->delete();
         return response()->json(null, 204);
     }
