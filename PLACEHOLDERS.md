@@ -6,6 +6,7 @@ Punto de partida: TaskFlow integrado de extremo a extremo (Sesión 6) — Sanctu
 |---|---|
 | `docs/README-PROYECTO.md` | Los 4 bloques `{{REEMPLAZAR}}` (descripción, versión de Laravel, pasos de arranque, patrón GoF aplicado) |
 | `.github/workflows/tests.yml` | El workflow completo (setup-php, composer install, correr `php artisan test`) |
+| `.env.example` | El bloque de producción (`APP_ENV`, `APP_DEBUG`, `APP_URL`) al desplegar en Railway/Render — en desarrollo local se deja comentado |
 
 ## Comando de arranque
 
